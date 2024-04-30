@@ -1,12 +1,9 @@
 ﻿using Catalog.Application.Abstractions;
 using Catalog.Application.UseCases.CatalogCases.Commands;
+using Catalog.Domain;
 using Catalog.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Catalog.Application.UseCases.CatalogCases.Handlers.CommandHandlers
 {
@@ -20,17 +17,29 @@ namespace Catalog.Application.UseCases.CatalogCases.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(CreateCatalogCommand request, CancellationToken cancellationToken)
         {
-            if(request != null) 
+            if (request != null)
             {
-                var user = new ProductCatalog
+                var catalog = new ProductCatalog
                 {
                     Name = request.Name,
                     Description = request.Description,
-
                 };
-                
-                await _context.Catalogs.AddAsync(user);
+
+                await _context.Catalogs.AddAsync( catalog, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new ResponseModel
+                {
+                    StatusCode = 201,
+                    Message = $"{request.Name} created✅",
+                    isSuccess = true
+                };
             }
+            return new ResponseModel
+            {
+                Message ="Catalog is maybe null❗",
+                StatusCode = 400
+            };
         }
     }
 }
