@@ -10,19 +10,25 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.UseCases.CatalogCases.Handlers.CommandHandlers
 {
-    internal class CreateCatalogCommandHandler : IRequestHandler<CreateCatalogCommand, ResponseModel>
+    public class CreateCatalogCommandHandler : IRequestHandler<CreateCatalogCommand, ResponseModel>
     {
-        private readonly ICatalogDbContext _context
-public CreateCatalogCommandHandler(ICatalogDbContext context)
+        private readonly ICatalogDbContext _context;
+        public CreateCatalogCommandHandler(ICatalogDbContext context)
         {
             _context = context;
         }
 
-        public Task<ResponseModel> Handle(CreateCatalogCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(CreateCatalogCommand request, CancellationToken cancellationToken)
         {
             if(request != null) 
             {
                 var user = new ProductCatalog
+                {
+                    Name = request.Name,
+                    
+                }
+                
+                await _context.Catalogs.AddAsync(user);
             }
         }
     }

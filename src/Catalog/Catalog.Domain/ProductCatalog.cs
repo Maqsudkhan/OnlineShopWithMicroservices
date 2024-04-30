@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Domain
 {
-    public class Catalog
+    public class ProductCatalog
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }

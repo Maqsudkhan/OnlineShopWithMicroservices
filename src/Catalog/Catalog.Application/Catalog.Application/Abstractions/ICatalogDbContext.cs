@@ -13,4 +13,8 @@ namespace Catalog.Application.Abstractions
         public DbSet<ProductCatalog> Catalogs { get; set; }
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
+
+    public class ProductCatalog
+    {
+    }
 }
