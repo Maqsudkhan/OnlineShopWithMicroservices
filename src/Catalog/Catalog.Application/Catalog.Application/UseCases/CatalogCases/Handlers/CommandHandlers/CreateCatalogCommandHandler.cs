@@ -25,8 +25,9 @@ namespace Catalog.Application.UseCases.CatalogCases.Handlers.CommandHandlers
                 var user = new ProductCatalog
                 {
                     Name = request.Name,
-                    
-                }
+                    Description = request.Description,
+
+                };
                 
                 await _context.Catalogs.AddAsync(user);
             }
