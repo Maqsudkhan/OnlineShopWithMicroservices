@@ -14,7 +14,5 @@ namespace Catalog.Application.Abstractions
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 
-    public class ProductCatalog
-    {
-    }
+    
 }

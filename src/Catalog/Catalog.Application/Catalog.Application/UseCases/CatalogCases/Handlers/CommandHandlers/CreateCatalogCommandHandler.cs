@@ -25,7 +25,7 @@ namespace Catalog.Application.UseCases.CatalogCases.Handlers.CommandHandlers
                     Description = request.Description,
                 };
 
-                await _context.Catalogs.AddAsync( catalog, cancellationToken);
+                await _context.Catalogs.AddAsync(catalog, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
